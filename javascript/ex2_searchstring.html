@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<script>
+	function Search(){
+			
+		var text = document.getElementById("input_area").value;
+		var search = document.getElementById("search").value;
+		<!-- console.log("search = > "+search); -->
+		var check = document.getElementsByName("check_case");
+		for (var i = 0; i < check.length; i++) {
+			if(check[i].checked){
+				check = check[i].value;
+				<!-- console.log(check); -->
+			}
+		}
+		
+		var array = text.split(" ");
+		//console.log(array);
+		
+		//Check Sensitive Case
+		var count = 0;
+		for(var i=0;i<array.length;i++){//Start for
+			//console.log(check);
+			if (check == "0") {
+				array[i]=array[i].toUpperCase();
+				search=search.toUpperCase()
+				if(array[i].search(search) > -1){
+					count++;
+				}
+				
+			}else{
+				if (array[i].search(search) > -1) {
+					count++;
+				}
+			}
+		}//End for
+		
+		if(array == "" || search == ""){
+			count = "Please Input Data!!!"
+			console.log("count => "+count);
+		}
+		document.getElementById("result").innerHTML = count;
+	}
+</script>
+<body>
+	<center>
+		<h1>Ex2 - Search String Non Sensitive Case</h1>
+		<hr>
+		<p>Text Input: 
+		<textarea id="input_area"></textarea>
+		</p>
+		<p>Sensitive Case : 
+	        <input type="radio" name="check_case" value="1" checked="checked">Yes
+	        <input type="radio" name="check_case" value="0">No
+	    </p>
+	    <p>Search :
+	    	<input type="text" name="search" id="search">
+	    </p>
+	    <button onclick="Search()">search</button>
+		<br><br>
+        <a> Result for Search : </a> <a id="result"></a>
+	</center>
+</body>
+</html>
