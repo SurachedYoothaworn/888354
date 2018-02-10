@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+<html>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+		.t{
+			color: green;
+		}
+		.f{
+			color: red;
+		}
+	</style>
+	<script>
+		function randdom(){
+			var min = -999;
+			var max = 999;
+			var rand_num = Math.floor(Math.random() * (max - min + 1)) + min;
+			var rand_num2 = Math.floor(Math.random() * (max - min + 1)) + min;
+			//console.log(rand_num);
+			//console.log(rand_num2);
+			var sum_show = rand_num+" + "+rand_num2+" : ";
+			$("#ans").append(sum_show);
+			var sum = rand_num+rand_num2;
+			$("#hid_ans").val(sum);
+			console.log(sum);
+		}
+		
+		function get_value(){
+			var sum = $("#hid_ans").val();
+			//console.log("sum => "+sum);
+			var result = $("#result").val();
+			//console.log("result => "+result);
+			if(sum == result){
+				$("#show_ans").removeClass("f");
+				$("#show_ans").text("");
+				$("#show_ans").append("That's correct.");
+				$("#show_ans").addClass("t");
+			}else{
+				$("#show_ans").removeClass("t");
+				$("#show_ans").text("");
+				$("#show_ans").append("That's wrong. The answer is "+sum);
+				$("#show_ans").addClass("f");
+			}
+		}
+	</script>
+<body>
+	<center>
+		<h1>Ex - Randdom Number for Answer</h1>
+		<hr>
+		<button onclick="randdom()">Randdom Number</button>
+		<p>
+			<a id="ans"></a><input type="text" name="result" id="result">
+			<input type="hidden" name="hid_ans" id="hid_ans" value="">
+	    </p>
+		<button onclick="get_value()">Send Answer</button>
+        <p id="tag_p"> Result for Search :  <a id="show_ans" ></a> </p>
+	</center>
+</body>
+</html>
